@@ -1,4 +1,4 @@
-import express  from 'express';
+import express from 'express'; // Import Express
 
 import { 
     uploadProcessedVideo,
@@ -12,10 +12,10 @@ import {
 // Create the local directories for videos
 setupDirectories();
   
-const app = express();
+const app: express.Application = express(); // Correct type for app
 app.use(express.json());
 
-app.post("/process-video", async (req, res) => {
+app.post('/process-video', async (req, res) => {
     
     // Get the bucket and filename from the Cloud Pub/Sub message
     let data;
@@ -27,7 +27,7 @@ app.post("/process-video", async (req, res) => {
         }
     } catch (error) {
         console.error(error);
-        return res.status(400).send('Bad Request: missing filename.');
+        res.status(400).send('Bad Request: missing filename.');
     }
     
     const inputFileName = data.name;
@@ -44,7 +44,7 @@ app.post("/process-video", async (req, res) => {
             deleteRawVideo(inputFileName),
             deleteProcessedVideo(outputFileName)
         ]);
-        return res.status(500).send('Processing failed');
+        res.status(500).send('Processing failed');
     }
 
     // Upload the processed video to Cloud Storage
@@ -55,7 +55,7 @@ app.post("/process-video", async (req, res) => {
         deleteProcessedVideo(outputFileName)
     ]);
 
-    return res.status(200).send('Processing finished successfully.');
+    res.status(200).send('Processing finished successfully.');
 
 });
 
