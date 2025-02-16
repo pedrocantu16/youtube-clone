@@ -6,7 +6,7 @@ import { getAuth, signInWithPopup, onAuthStateChanged, User, GoogleAuthProvider 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyA8CZVhER874CTYnrUZnU9HKZ8vlmoh2zM",
+    apiKey: "AIzaSyCJkUMfNRWq6_gmLuSyVFu-ykJ3ue7q488",
     authDomain: "yt-clone-62c2c.firebaseapp.com",
     projectId: "yt-clone-62c2c",
     storageBucket: "yt-clone-62c2c.firebasestorage.app",
