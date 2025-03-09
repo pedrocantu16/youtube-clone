@@ -1,12 +1,13 @@
 // import functions you need from the SDKs you need
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import {getFunctions} from 'firebase/functions';
 import { getAuth, signInWithPopup, onAuthStateChanged, User, GoogleAuthProvider } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyCJkUMfNRWq6_gmLuSyVFu-ykJ3ue7q488",
+    apiKey: process.env.APP_KEY,
     authDomain: "yt-clone-62c2c.firebaseapp.com",
     projectId: "yt-clone-62c2c",
     storageBucket: "yt-clone-62c2c.firebasestorage.app",
@@ -31,3 +32,5 @@ export function signOutWithGoogle() {
 export function onAuthStateChangedHelper(callback: (user: User | null) => void) {
     return onAuthStateChanged(auth, callback);
 }
+
+export const functions = getFunctions(app);

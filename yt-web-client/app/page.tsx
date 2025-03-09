@@ -9,18 +9,19 @@ export default async function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-      {
-        videos.map((video) => (
-          // eslint-disable-next-line react/jsx-key
-          <Link href={`/watch?v=${video.filename}`}>
-            <Image src={'../public/thumbnail.png'} alt='video' width={120} height={80}
-              className={styles.thumbnail}/>
-          </Link>
-        ))
-      }
+        {
+          videos.map((video) => (
+            <Link href={`/watch?v=${video.filename}`} key={video.id}>
+              <Image src={'../public/thumbnail.png'} alt='video' width={120} height={80}
+                className={styles.thumbnail}/>
+            </Link>
+          ))
+        }
       </main>
       <footer className={styles.footer}>
       </footer>
     </div>
   );
 }
+
+export const revalidate = 30;
