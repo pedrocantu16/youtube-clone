@@ -35,13 +35,13 @@ video processing service
 
 # Deploy the service
 
-- `docker build -t us-central1-docker.pkg.dev/yt-clone-62c2c/video-processing-repo/video-processing-service . --platform linux/amd64`
+- `docker build -t us-central1-docker.pkg.dev/<APP_ID>/video-processing-repo/video-processing-service . --platform linux/amd64`
 - In you are using mac, add `--platform linux/amd64`
-- Push the docker image to Google Artifact Registry: `docker push us-central1-docker.pkg.dev/yt-clone-62c2c/video-processing-repo/video-processing-service`
+- Push the docker image to Google Artifact Registry: `docker push us-central1-docker.pkg.dev/<APP_ID>/video-processing-repo/video-processing-service`
 
 - Redeploy the container to Cloud Run via CLI:
 ```
-gcloud run deploy video-processing-service --image us-central1-docker.pkg.dev/yt-clone-62c2c/video-processing-repo/video-processing-service \
+gcloud run deploy video-processing-service --image us-central1-docker.pkg.dev/<APP_ID>/video-processing-repo/video-processing-service \
   --region=us-central1 \
   --platform managed \
   --timeout=3600 \
