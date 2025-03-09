@@ -20,8 +20,12 @@ export const createUser = functions.identity.beforeUserCreated(
       photoUrl: UserRecord.data.photoURL,
     };
 
-    firestore.collection("users").doc(UserRecord.data.uid).set(userInfo);
     logger.info(`User Created: ${JSON.stringify(userInfo)}`);
+    try {
+      firestore.collection("users").doc(UserRecord.data.uid).set(userInfo);
+    } catch (err) {
+      console.error(err);
+    }
     return;
   });
 
