@@ -1,5 +1,5 @@
 # youtube-clone
-video processing service
+video processing service.
 
 # Pre-requisites for development
 - Install Node.js and NPM
@@ -15,6 +15,7 @@ video processing service
    - for mac/linux use homebrew `brew install ffmpeg`
    - for ubuntu run `sudo apt-get update && sudo apt-get install -y ffmpeg`
 - Install Thunder Client in VSCode or you can use Postman or `curl` for local testing
+- Developmento of this project was done using Google cloud. So deployment of the service assumes gcloud is available. `=)`
 
 
 
@@ -56,3 +57,25 @@ gcloud run deploy video-processing-service --image us-central1-docker.pkg.dev/<A
 - `yt-api-service/functions` package
 - [optional] run `npm install`
 - run `firebase deploy --only functions`
+
+# Deploy Web App
+
+- Build image `docker build -t us-central1-docker.pkg.dev/<APP_ID>/yt-web-client-repo/yt-web-client . --platform linux/amd64`
+- If you are using mac, add `--platform linux/amd64`
+- Push the Docker image to Google Artifact Registry `docker push us-central1-docker.pkg.dev/<APP_ID>/yt-web-client-repo/yt-web-client`
+- Deploy Docker image to Cloud Run
+
+```
+gcloud run deploy yt-web-client --image us-central1-docker.pkg.dev/<APP_ID>/yt-web-client-repo/yt-web-client \
+  --region=us-central1 \
+  --platform managed \
+  --timeout=3600 \
+  --memory=2Gi \
+  --cpu=1 \
+  --min-instances=0 \
+  --max-instances=1
+```
+
+- Test the web client. Visit the URL provided by Cloud Run to test the web client.
+- You will most likely not be able to sign in. This is because we haven't configured the OAuth consent screen yet.
+- Copy the URL and navigate to Firebase Auth in the console. Go to the Settings tab and scroll down to Authorized domains. Add the URL to the list of authorized domains.

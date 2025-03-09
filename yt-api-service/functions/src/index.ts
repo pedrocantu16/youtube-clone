@@ -70,4 +70,3 @@ export const getVideos = onCall({maxInstances: 1}, async () => {
     await firestore.collection(videoCollectionId).limit(10).get();
   return querySnapshot.docs.map((doc) => doc.data());
 });
-
